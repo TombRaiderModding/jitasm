@@ -2378,6 +2378,8 @@ struct Frontend
 	void jmp(const std::string& label_name)		{AppendJmp(GetLabelID(label_name));}
 #ifdef JITASM64
 	void jmp(const Reg64& dst) { AppendInstr(I_CALL, 0xFF, 0, Imm8(4), R(dst)); }
+#else
+	void jmp(const Reg32& dst) { AppendInstr(I_CALL, 0xFF, 0, Imm8(4), R(dst)); }
 #endif
 	void ja(const std::string& label_name)		{AppendJcc(JCC_A, GetLabelID(label_name));}
 	void jae(const std::string& label_name)		{AppendJcc(JCC_AE, GetLabelID(label_name));}
